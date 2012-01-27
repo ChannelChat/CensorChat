@@ -1,5 +1,5 @@
 name: CensorChat
 main: feildmaster.module.censorchat.Censory
-version: 1.0.1
+version: 1.1-dev
 author: feildmaster
 depend: [ChannelChat]
