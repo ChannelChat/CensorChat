@@ -1,14 +1,19 @@
 package feildmaster.module.censorchat;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
 public class Filter {
     private static final Pattern letters = Pattern.compile("[A-Za-z]"); // This part was an idea from NodinChan
     private Pattern pattern;
+    private String match;
 
     public Filter(String regex) {
         pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+    }
+
+    public Filter(String regex, String replace) {
+        pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        match = replace;
     }
 
     public String replaceAll(String message) {

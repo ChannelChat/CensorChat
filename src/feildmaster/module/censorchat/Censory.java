@@ -1,15 +1,10 @@
 package feildmaster.module.censorchat;
 
-import com.feildmaster.channelchat.configuration.ModuleConfiguration;
+import com.feildmaster.channelchat.Module;
 import java.util.*;
-import org.bukkit.event.Event;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
 
-public class Censory extends JavaPlugin {
+public class Censory extends Module {
     private static Censory plugin;
-
-    private ModuleConfiguration config;
     private List<Filter> filters;
 
     public boolean All;
@@ -19,53 +14,38 @@ public class Censory extends JavaPlugin {
     public boolean Private;
     public List<String> Channels;
 
-    public void onDisable() {
-        getServer().getLogger().info(String.format("[%1$s] Disabled!", getDescription().getName()));
-    }
+    public void onDisable() {}
 
     public void onEnable() {
         plugin = this;
-
-        setupConfig();
-
         reloadConfig();
-
-        PluginManager pm = getServer().getPluginManager();
-        pm.registerEvent(Event.Type.PLAYER_CHAT, new Moderator(), Event.Priority.Normal, this);
-
-        getServer().getLogger().info(String.format("[%1$s] v%2$s Enabled!", getDescription().getName(), getDescription().getVersion()));
-    }
-
-    private void setupConfig() {
-        config = new ModuleConfiguration(this);
-        if(!config.exists())
-            config.saveDefaults();
+        getServer().getPluginManager().registerEvents(new Moderator(), plugin);
     }
 
     private void reloadSettings() {
-        All = config.getBoolean("protect.all");
-        Global = config.getBoolean("protect.global");
-        Local = config.getBoolean("protect.local");
-        World = config.getBoolean("protect.world");
-        Private = config.getBoolean("protect.private");
+        All = getConfig().getBoolean("protect.all");
+        Global = getConfig().getBoolean("protect.global");
+        Local = getConfig().getBoolean("protect.local");
+        World = getConfig().getBoolean("protect.world");
+        Private = getConfig().getBoolean("protect.private");
     }
 
     private void createFilters() {
         filters = new LinkedList<Filter>();
-        for(Object word : config.getList("patterns")) {
+        for(Object word : getConfig().getList("patterns")) {
             filters.add(new Filter(word.toString()));
         }
     }
 
     private void compileChannels() {
         Channels = new ArrayList<String>();
-        for(Object o : config.getList("protect.channels"))
+        for(Object o : getConfig().getList("protect.channels")) {
             Channels.add(o.toString());
+        }
     }
 
     public void reloadConfig() {
-        if(!config.load())
-            System.out.println(format("Error occurred when loading configuration."));
+        super.reloadConfig();
         reloadSettings();
         compileChannels();
         createFilters();
@@ -79,15 +59,7 @@ public class Censory extends JavaPlugin {
         return message;
     }
 
-    public List<Filter> getFilters() {
-        return new LinkedList<Filter>(filters);
-    }
-
     public static Censory getPlugin() {
         return plugin;
-    }
-
-    public String format(String message) {
-        return String.format("[%1$s] %2$s", getDescription().getName(), message);
     }
 }
