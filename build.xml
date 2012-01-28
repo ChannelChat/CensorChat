@@ -30,4 +30,8 @@
 
         <jar compress="true" destfile="${dist}/${ant.project.name}.jar" basedir="${build}"/>
     </target>
+    
+    <target name="jar" depends="build">
+        <echo>Built With Netbeans</echo>
+    </target>
 </project>
