@@ -46,6 +46,9 @@ public class Censory extends Module {
 
     public void reloadConfig() {
         super.reloadConfig();
+        if(getConfig().needsUpdate()) {
+            saveDefaultConfig();
+        }
         reloadSettings();
         compileChannels();
         createFilters();
