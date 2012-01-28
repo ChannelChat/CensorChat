@@ -1,4 +1,4 @@
-package feildmaster.module.censorchat;
+package com.feildmaster.module.censorchat;
 
 import org.bukkit.event.*;
 import com.feildmaster.channelchat.event.channel.ReloadEvent;

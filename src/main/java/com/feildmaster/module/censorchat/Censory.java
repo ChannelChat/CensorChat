@@ -1,4 +1,4 @@
-package feildmaster.module.censorchat;
+package com.feildmaster.module.censorchat;
 
 import com.feildmaster.channelchat.Module;
 import java.util.*;

@@ -1,4 +1,4 @@
-package feildmaster.module.censorchat;
+package com.feildmaster.module.censorchat;
 
 import java.util.regex.*;
 
