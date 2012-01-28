@@ -1,0 +1,13 @@
+# Protect "all": Set to true to censor all player chat. (ChannelChat or not)
+# Protect "channels": A list of channels you want to protect, by name (ONLY by name, not tag)
+
+patterns:
+  - fuck
+protect:
+  all: false
+  global: true
+  world: true
+  local: true
+  private: false
+  channels:
+    - General

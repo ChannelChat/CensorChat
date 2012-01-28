@@ -1,0 +1,5 @@
+name: ${name}
+main: com.feildmaster.module.censorchat.Censory
+version: ${version}
+author: feildmaster
+depend: [ChannelChat]
