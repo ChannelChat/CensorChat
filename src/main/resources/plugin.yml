@@ -3,3 +3,12 @@ main: com.feildmaster.module.censorchat.Censory
 version: ${version}
 author: feildmaster
 depend: [ChannelChat]
+permissions:
+  CensorChat.admin:
+    description: 'Gives access to managing filters'
+    default: op
+commands:
+  censor:
+    description: 'General CensorChat command'
+    permission: CensorChat.admin
+    usage: /<command> [action] [pattern]

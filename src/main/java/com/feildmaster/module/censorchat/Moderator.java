@@ -4,12 +4,12 @@ import org.bukkit.event.*;
 import com.feildmaster.channelchat.event.channel.ReloadEvent;
 import com.feildmaster.channelchat.channel.Channel;
 import com.feildmaster.channelchat.event.player.ChannelPlayerChatEvent;
-import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import static com.feildmaster.channelchat.channel.ChannelManager.getManager;
 
 public class Moderator implements Listener {
     @EventHandler
-    public void onPlayerChat(PlayerChatEvent event) {
+    public void onPlayerChat(AsyncPlayerChatEvent event) {
         if(event.isCancelled()) return;
 
         if(Censory.getPlugin().All) {

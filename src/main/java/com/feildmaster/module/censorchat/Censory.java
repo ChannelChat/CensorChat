@@ -1,6 +1,7 @@
 package com.feildmaster.module.censorchat;
 
 import com.feildmaster.channelchat.Module;
+import com.feildmaster.module.censorchat.command.CensorCommand;
 import java.util.*;
 
 public class Censory extends Module {
@@ -13,6 +14,7 @@ public class Censory extends Module {
     public boolean World;
     public boolean Private;
     public List<String> Channels;
+    public List<Object> Patterns;
 
     public void onDisable() {}
 
@@ -20,6 +22,7 @@ public class Censory extends Module {
         plugin = this;
         reloadConfig();
         getServer().getPluginManager().registerEvents(new Moderator(), plugin);
+        getCommand("censor").setExecutor(new CensorCommand(plugin));
     }
 
     private void reloadSettings() {
@@ -32,8 +35,10 @@ public class Censory extends Module {
 
     private void createFilters() {
         filters = new LinkedList<Filter>();
+        Patterns = new ArrayList<Object>();
         for(Object word : getConfig().getList("patterns")) {
             filters.add(new Filter(word.toString()));
+            Patterns.add(word.toString());
         }
     }
 
